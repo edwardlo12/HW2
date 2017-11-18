@@ -94,14 +94,15 @@ void perspect(Mat img)
 	warpPerspective(img, warped, warp_mat, warped.size(), INTER_LINEAR, BORDER_CONSTANT);
 	
 	Mat opt,shp_1,shp_2;
-	medianBlur(warped, opt, 5);
+	//medianBlur(warped, opt, 5);
+	bilateralFilter(warped, opt, 20, 200, 50);
 	shp_1 = Mat::zeros(opt.rows, opt.cols, opt.type());
 	sharpen(opt, shp_1);
 	
 	Mat roi(shp_1, Rect(0, 0, 670, 379));
-	imshow("perspect", warped);
-	imshow("opt", opt);
-	imshow("shp_1", shp_1);
+	//imshow("perspect", warped);
+	//imshow("opt", opt);
+	//imshow("shp_1", shp_1);
 	imshow("roi", roi);
 	 
 }
